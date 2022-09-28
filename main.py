@@ -29,6 +29,10 @@ def lambda_handler(event, context):
       'status': {
           'Value': 'InProcessing',
           'Action': 'PUT'
+      },
+      'name': {
+          'Value': uploaded_file.metadata['name'] if 'name' in uploaded_file.metadata else "",
+          'Action': 'PUT'
       }
     },
   )
