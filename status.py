@@ -27,10 +27,16 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'body': json.dumps(ret)
+            'body': json.dumps(ret),
+            'headers': {
+                "Access-Control-Allow-Origin": "*"
+            }
         }
 
     return {
         'statusCode': 404,
-        'body': "Job NOT FOUND"
+        'body': "Job NOT FOUND",
+        'headers': {
+            "Access-Control-Allow-Origin": "*"
+        }
     }

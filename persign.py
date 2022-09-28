@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     )["Credentials"]
     session = boto3.Session(credential["AccessKeyId"], credential["SecretAccessKey"], credential["SessionToken"], "us-west-2")
     s3 = session.client("s3")
-    signature = s3.generate_presigned_post(Bucket="my-smart-pdf", Key=f"upload/{file_md5}.pdf", Conditions=[["content-length-range", 1, 10485760], {"Content-MD5": file_md5}, ["starts-with", "x-amz-meta-name", ""]], ExpiresIn=600)
+    signature = s3.generate_presigned_post(Bucket="my-smart-pdf", Key=f"upload/{file_md5}.pdf", Conditions=[["content-length-range", 1, 10485760], {"Content-MD5": file_md5}, ["starts-with", "$x-amz-meta-name", ""]], ExpiresIn=600)
 
     return {
         'statusCode': 200,
