@@ -110,8 +110,8 @@ function updateStatus() {
             store.data.retry2 = 4; // DO NOT Retry
         }
 
-        if (store.data.retry <= 30 && store.data.retry2 <= 3) {
-            setTimeout(updateStatus, 10000);
+        if (store.data.retry <= 60 && store.data.retry2 <= 6) {
+            setTimeout(updateStatus, 5000);
         } else {
             showError();
         }
