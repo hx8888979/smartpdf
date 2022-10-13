@@ -14,6 +14,7 @@ async function onFileChange(event) {
         const ui = event.target;
         file = ui.files[0];
     }
+    store.data.file = file;
     store.data.name = file.name;
     disabled();
 
@@ -58,7 +59,7 @@ function onPreSign() {
         formData.append("X-Amz-Signature", signature);
         formData.append("Signature", signature);
 
-        formData.append("file", store.ui.pdfFileInput.files[0]);
+        formData.append("file", store.data.file);
 
         const req = new XMLHttpRequest();
         req.open('POST', url);
