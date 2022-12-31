@@ -1,4 +1,4 @@
-const api = "https://bmgq1lq4db.execute-api.us-west-2.amazonaws.com/prod/decryption"
+const api = "https://c2db7yle84.execute-api.us-west-2.amazonaws.com/prod/decryption"
 const store = {};
 
 async function onFileChange(event) {
