@@ -15,7 +15,7 @@ def lambda_handler(event, context):
   key = urllib.parse.unquote(key)
   uploaded_file = s3.Object(bucket_name, key)
   file_name = Path(key).name
-  file_id = Path(file_name).stem
+  file_id = urllib.parse.unquote(Path(file_name).stem)
   origin_file_name = Path(uploaded_file.metadata['name']).stem if 'name' in uploaded_file.metadata else file_id
   download_path = f"/tmp/{file_name}"
   output_file_name = f"{origin_file_name}_decrypted.pdf"
@@ -44,7 +44,7 @@ def lambda_handler(event, context):
     for page in reader.pages:
       writer.add_page(page)
     writer.write(output_path)
-    print(f"{reader.getNumPages()} pages processed")
+    print(f"{len(reader.pages)} pages processed")
 
     output_s3_info = s3.Object(bucket_name, f"g/{output_file_name}")
     output_s3_info.upload_file(output_path)
@@ -79,3 +79,4 @@ def lambda_handler(event, context):
       }
     },
   )
+  
